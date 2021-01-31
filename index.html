@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>MyRoutes</title>
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css" />
+    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="node_modules/leaflet.bigimage/dist/Leaflet.BigImage.min.css">
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row h-100">
+            <div class="col-sm-10 offset-sm-1">
+                <div class="card" style="height: 100%;width: 100%;">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
+    <script src="node_modules/leaflet/dist/leaflet.js"></script>
+    <script src="node_modules/togeojson/togeojson.js"></script>
+    <script src="node_modules/leaflet-filelayer/src/leaflet.filelayer.js"></script>
+    <script src="node_modules/leaflet.bigimage/dist/Leaflet.BigImage.min.js"></script>
+    <script type="text/javascript">
+        (function (window) {
+            'use strict';
+
+            // 地図設定
+            // let uri = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            let uri = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+            // let attr = '© OpenStreetMap contributors'
+            let attr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+
+            function initMap() {
+                var control;
+                var L = window.L;
+                var osm = L.tileLayer(uri, {
+                    attribution: attr
+                });
+                var map = L.map('map', {
+                    center: [35.681236, 139.767125],
+                    zoom: 10
+                }).addLayer(osm);
+                var style = {
+                    color: 'red',
+                    opacity: 1.0,
+                    fillOpacity: 1.0,
+                    weight: 1,
+                    clickable: false
+                };
+                L.Control.FileLayerLoad.LABEL = '<img class="icon" src="./pin.svg" alt="Select route files"/>';
+                control = L.Control.fileLayerLoad({
+                    fitBounds: true,
+                    layerOptions: {
+                        style: style,
+                        pointToLayer: function (data, latlng) {
+                            // return L.circleMarker(
+                            //     latlng,
+                            //     { style: style }
+                            // );
+                        }
+                    }
+                });
+                control.addTo(map);
+                control.loader.on('data:loaded', function (e) {
+                    var layer = e.layer;
+                    console.log(layer);
+                });
+
+                console.log(L.control)
+                L.control.BigImage({
+                    title: 'Capture',
+                    maxScale: 3,
+                    inputTitle: '',
+                    position: 'topleft'
+                }).addTo(map);
+            }
+
+            window.addEventListener('load', function () {
+                initMap();
+            });
+        }(window));
+    </script>
+</body>
+
+</html>
