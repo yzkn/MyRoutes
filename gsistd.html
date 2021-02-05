@@ -26,9 +26,9 @@
             <div class="col-sm-2">
                 <div class="card" style="height: 100%;width: 100%;">
                     <ul class="list-group">
-                        <li class="list-group-item">OSM</li>
+                        <li class="list-group-item"><a href="index.html" target="_blank">OSM</a></li>
                         <li class="list-group-item"><a href="image.html" target="_blank">Esri</a></li>
-                        <li class="list-group-item"><a href="gsistd.html" target="_blank">地理院タイル</a></li>
+                        <li class="list-group-item">地理院タイル</li>
                         <li class="list-group-item"><a href="gsipale.html" target="_blank">淡色地図</a></li>
                         <li class="list-group-item"><a href="gsirelief.html" target="_blank">色別標高図</a></li>
                         <li class="list-group-item"><a href="gsilum200k.html" target="_blank">20万分1土地利用図</a></li>
@@ -50,8 +50,8 @@
             'use strict';
 
             // 地図設定
-            let uri = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-            let attr = '© OpenStreetMap contributors'
+            let uri = 'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png';
+            let attr = '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。'
 
             function initMap() {
                 var control;
