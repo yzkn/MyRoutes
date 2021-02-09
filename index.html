@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="node_modules/normalize.css/normalize.css" />
     <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="node_modules/leaflet.bigimage/dist/Leaflet.BigImage.min.css">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="node_modules/leaflet-easybutton/src/easy-button.css">
+    <link rel="stylesheet" href="css/app.css" />
 
 </head>
 
@@ -27,7 +28,7 @@
                 <div class="card" style="height: 100%;width: 100%;">
                     <ul class="list-group">
                         <li class="list-group-item">OSM</li>
-                        <li class="list-group-item"><a href="image.html" target="_blank">Esri</a></li>
+                        <li class="list-group-item"><a href="image.html" target="_blank">Esri(航空写真)</a></li>
                         <li class="list-group-item"><a href="gsistd.html" target="_blank">地理院タイル</a></li>
                         <li class="list-group-item"><a href="gsipale.html" target="_blank">淡色地図</a></li>
                         <li class="list-group-item"><a href="gsirelief.html" target="_blank">色別標高図</a></li>
@@ -45,64 +46,22 @@
     <script src="node_modules/togeojson/togeojson.js"></script>
     <script src="node_modules/leaflet-filelayer/src/leaflet.filelayer.js"></script>
     <script src="node_modules/leaflet.bigimage/dist/Leaflet.BigImage.min.js"></script>
+    <script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
+    <script src="node_modules/dom-to-image/src/dom-to-image.js"></script>
     <script type="text/javascript">
+        // 地図設定
+        let uri = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        let attr = '© OpenStreetMap contributors';
+
         (function (window) {
             'use strict';
-
-            // 地図設定
-            let uri = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-            let attr = '© OpenStreetMap contributors'
-
-            function initMap() {
-                var control;
-                var L = window.L;
-                var osm = L.tileLayer(uri, {
-                    attribution: attr
-                });
-                var map = L.map('map', {
-                    center: [35.681236, 139.767125],
-                    zoom: 10
-                }).addLayer(osm);
-                var style = {
-                    color: 'red',
-                    opacity: 1.0,
-                    fillOpacity: 1.0,
-                    weight: 1,
-                    clickable: false
-                };
-                L.Control.FileLayerLoad.LABEL = '<img class="icon" src="./pin.svg" alt="Select route files"/>';
-                control = L.Control.fileLayerLoad({
-                    fitBounds: true,
-                    layerOptions: {
-                        style: style,
-                        pointToLayer: function (data, latlng) {
-                            // return L.circleMarker(
-                            //     latlng,
-                            //     { style: style }
-                            // );
-                        }
-                    }
-                });
-                control.addTo(map);
-                control.loader.on('data:loaded', function (e) {
-                    var layer = e.layer;
-                    console.log(layer);
-                });
-
-                console.log(L.control)
-                L.control.BigImage({
-                    title: 'Capture',
-                    maxScale: 3,
-                    inputTitle: '',
-                    position: 'topleft'
-                }).addTo(map);
-            }
 
             window.addEventListener('load', function () {
                 initMap();
             });
         }(window));
     </script>
+    <script src="js/map.js"></script>
 </body>
 
 </html>
