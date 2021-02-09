@@ -37,6 +37,13 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-5">
+            <div class="col-sm-10">
+                <div class="card" style="height: 100%;width: 100%;">
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
@@ -50,7 +57,7 @@
     <script src="node_modules/dom-to-image/src/dom-to-image.js"></script>
     <script type="text/javascript">
         // 地図設定
-        let uri = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        let uri = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
         let attr = '© OpenStreetMap contributors';
 
         (function (window) {

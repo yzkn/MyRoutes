@@ -66,30 +66,44 @@ function initMiniMap() {
 //
 
 function shareImage() {
-    // domtoimage.toPng(document.getElementsByClassName('leaflet-pane leaflet-map-pane')[0])
-    //     .then(function (dataUrl) {
-    //         var img = new Image();
-    //         img.src = dataUrl;
-    //         document.body.appendChild(img);
-    //     })
-    //     .catch(function (error) {
-    //         console.error('oops, something went wrong!', error);
-    //     });
-    domtoimage.toBlob(document.getElementById('map'))
-        .then(function (blob) {
-            const image = new File([blob], 'map.png', { type: 'image/png' });
-            if (navigator.canShare && navigator.canShare({ files: [image] })) {
-                navigator.share({
-                    text: 'MyRoutesで作成した軌跡画像を共有します。',
-                    url: thisUrl,
-                    files: [image]
-                }).then(() => {
-                    console.log('共有に成功しました。')
-                }).catch((error) => {
-                    console.log('共有に失敗しました。', error)
-                })
-            } else {
-                window.alert("このブラウザは Web Share API に対応していないようです。Chrome for Android をご利用ください。");
-            }
+    domtoimage.toPng(document.getElementsByClassName('leaflet-pane leaflet-map-pane')[0])
+        .then(function (dataUrl) {
+            var img = new Image();
+            img.src = dataUrl;
+
+            img.onload = () => {
+                var mapDiv = document.getElementById('map');
+                const canvas = document.createElement('canvas');
+                canvas.width = mapDiv.clientWidth;
+                canvas.height = mapDiv.clientHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, mapDiv.clientWidth, mapDiv.clientHeight, 0, 0, mapDiv.clientWidth, mapDiv.clientHeight);
+
+                canvas.toBlob((blob) => {
+                    const image = new File([blob], 'map.png', { type: 'image/png' });
+                    if (navigator.canShare && navigator.canShare({ files: [image] })) {
+                        navigator.share({
+                            text: 'MyRoutesで作成した軌跡画像を共有します。',
+                            url: thisUrl,
+                            files: [image]
+                        }).then(() => {
+                            console.log('共有に成功しました。')
+                        }).catch((error) => {
+                            console.log('共有に失敗しました。', error)
+                        })
+                    } else {
+                        window.alert("このブラウザは Web Share API に対応していないようです。Chrome for Android をご利用ください。");
+
+                        var resultDiv = document.getElementById('result');
+                        const details = document.createElement('details');
+                        resultDiv.textContent += '出力画像';
+                        resultDiv.appendChild(details);
+                        details.appendChild(canvas);
+                    }
+                });
+            };
+        })
+        .catch(function (error) {
+            console.error('oops, something went wrong!', error);
         });
 }
