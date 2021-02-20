@@ -27,9 +27,9 @@ function initMap() {
     };
     L.Control.FileLayerLoad.LABEL = '<img class="icon" src="img/pin.svg" />';
     control = L.Control.fileLayerLoad({
+        fileSizeLimit: 1024000,
         fitBounds: true,
         layerOptions: {
-            fileSizeLimit: 1024000,
             style: style,
             pointToLayer: function (data, latlng) {
                 // return L.circleMarker(
