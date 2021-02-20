@@ -29,6 +29,7 @@ function initMap() {
     control = L.Control.fileLayerLoad({
         fitBounds: true,
         layerOptions: {
+            fileSizeLimit: 1024000,
             style: style,
             pointToLayer: function (data, latlng) {
                 // return L.circleMarker(
