@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-2">
             <div class="col-sm-8">
                 <div class="card">
                     <div id="result"></div>
@@ -45,8 +45,8 @@
     <script src="node_modules/dom-to-image/src/dom-to-image.js"></script>
     <script type="text/javascript">
         // 地図設定
-        let uri = 'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png';
-        let attr = '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。';
+        let uri = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        let attr = '© OpenStreetMap contributors';
 
         (function (window) {
             'use strict';
