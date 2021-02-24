@@ -9,6 +9,19 @@ var thisUrl = location.href;
 
 
 // Initialize
+function initMenu() {
+    var elem = document.getElementById('menu');
+    elem.innerHTML = `
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="osm.html" target="_blank">OSM</a></li>
+                        <li class="list-group-item"><a href="index.html" target="_blank">Esri(航空写真)</a></li>
+                        <li class="list-group-item"><a href="gsistd.html" target="_blank">地理院タイル</a></li>
+                        <li class="list-group-item"><a href="gsipale.html" target="_blank">淡色地図</a></li>
+                        <li class="list-group-item"><a href="gsirelief.html" target="_blank">色別標高図</a></li>
+                        <li class="list-group-item"><a href="gsilum200k.html" target="_blank">20万分1土地利用図</a></li>
+                    </ul>`;
+}
+
 function initMap() {
     L = window.L;
     osm = L.tileLayer(uri, {
