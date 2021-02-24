@@ -4,14 +4,14 @@
   "name": "MyRoutes",
   "short_name": "MyRoutes",
   "scope": "/MyRoutes/",
-  "display": "browser",
+  "display": "standalone",
   "start_url": "https://ya-androidapp.github.io/MyRoutes/",
-  "background_color": "#000000",
+  "background_color": "#ffffff",
   "theme_color": "transparent",
-  "description": "",
+  "description": "The visualizer of GPS track logs",
   "orientation": "any",
   "related_applications": [],
-  "prefer_related_applications": "false",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icon/icon-512.png",
