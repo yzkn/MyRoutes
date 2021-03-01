@@ -9,19 +9,6 @@ var thisUrl = location.href;
 
 
 // Initialize
-function initMenu() {
-    var elem = document.getElementById('menu');
-    elem.innerHTML = `
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="osm.html" target="_blank">OSM</a></li>
-                        <li class="list-group-item"><a href="index.html" target="_blank">Esri(航空写真)</a></li>
-                        <li class="list-group-item"><a href="gsistd.html" target="_blank">地理院タイル</a></li>
-                        <li class="list-group-item"><a href="gsipale.html" target="_blank">淡色地図</a></li>
-                        <li class="list-group-item"><a href="gsirelief.html" target="_blank">色別標高図</a></li>
-                        <li class="list-group-item"><a href="gsilum200k.html" target="_blank">20万分1土地利用図</a></li>
-                    </ul>`;
-}
-
 function initMap() {
     L = window.L;
     osm = L.tileLayer(uri, {
@@ -107,12 +94,6 @@ function shareImage() {
                         })
                     } else {
                         window.alert("このブラウザは Web Share API に対応していないようです。Chrome for Android をご利用ください。");
-
-                        var resultDiv = document.getElementById('result');
-                        const details = document.createElement('details');
-                        resultDiv.textContent += '出力画像';
-                        resultDiv.appendChild(details);
-                        details.appendChild(canvas);
                     }
                 });
             };

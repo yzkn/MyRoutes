@@ -3,9 +3,9 @@
   "lang": "ja",
   "name": "MyRoutes",
   "short_name": "MyRoutes",
-  "scope": "/MyRoutes/",
+  "scope": "/",
   "display": "standalone",
-  "start_url": "https://ya-androidapp.github.io/MyRoutes/",
+  "start_url": "https://localhost/",
   "background_color": "#ffffff",
   "theme_color": "transparent",
   "description": "The visualizer of GPS track logs",
@@ -29,6 +29,6 @@
       "type": "image/png"
     }
   ],
-  "url": "https://ya-androidapp.github.io/MyRoutes/",
+  "url": "https://localhost/",
   "generated": true
 }
