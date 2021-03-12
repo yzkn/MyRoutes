@@ -77,6 +77,12 @@ function initMiniMap() {
     var miniMap = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
 }
 
+function initGeoman() {
+    map.pm.addControls({
+        position: 'topleft'
+    });
+}
+
 //
 
 function shareImage() {
