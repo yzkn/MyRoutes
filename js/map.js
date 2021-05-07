@@ -8,18 +8,62 @@ var osm;
 var thisUrl = location.href;
 
 
+// Util
+function mapmove() {
+    if (map != null) {
+        const latitude = document.getElementById('latitude').value;
+        const longitude = document.getElementById('longitude').value;
+        const zoom = document.getElementById('zoom').value;
+        map.panTo(new L.LatLng(roundlatlng(parseFloat(latitude)), roundlatlng(parseFloat(longitude))));
+        map.setZoom(parseInt(zoom));
+        console.log(
+            'map.panTo()',
+            roundlatlng(parseFloat(latitude)), roundlatlng(parseFloat(longitude)), parseInt(zoom)
+        );
+    }
+}
+
+function roundlatlng(val) {
+    const base = 0.0000001 // 約1cm相当の経緯度
+    return Math.round(val / base) * base;
+}
+
+
 // Initialize
 function initMenu() {
-    var elem = document.getElementById('menu');
-    elem.innerHTML = `
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="osm.html" target="_blank">OSM</a></li>
-                        <li class="list-group-item"><a href="index.html" target="_blank">Esri(航空写真)</a></li>
-                        <li class="list-group-item"><a href="gsistd.html" target="_blank">地理院タイル</a></li>
-                        <li class="list-group-item"><a href="gsipale.html" target="_blank">淡色地図</a></li>
-                        <li class="list-group-item"><a href="gsirelief.html" target="_blank">色別標高図</a></li>
-                        <li class="list-group-item"><a href="gsilum200k.html" target="_blank">20万分1土地利用図</a></li>
-                    </ul>`;
+    var menu = document.getElementById('menu');
+    menu.innerHTML = `
+        <ul class="list-group">
+            <li class="list-group-item"><a href="osm.html" target="_blank">OSM</a></li>
+            <li class="list-group-item"><a href="index.html" target="_blank">Esri(航空写真)</a></li>
+            <li class="list-group-item"><a href="gsistd.html" target="_blank">地理院タイル</a></li>
+            <li class="list-group-item"><a href="gsipale.html" target="_blank">淡色地図</a></li>
+            <li class="list-group-item"><a href="gsirelief.html" target="_blank">色別標高図</a></li>
+            <li class="list-group-item"><a href="gsilum200k.html" target="_blank">20万分1土地利用図</a></li>
+        </ul>`;
+
+    var latlngzoom = document.getElementById('latlngzoom');
+    latlngzoom.innerHTML = `
+        <form>
+            <div class="form-group">
+                <label for="latitude">Latitude</label>
+                <input type="number" step="0.000001" min="-90" max="90" class="form-control" id="latitude" placeholder="Enter latitude" value="35.681236">
+            </div>
+            <div class="form-group">
+                <label for="longitude">Longitude</label>
+                <input type="number" step="0.000001" min="-180" max="180" class="form-control" id="longitude" placeholder="longitude" value="139.767125">
+            </div>
+            <div class="form-group">
+                <label for="zoom">Zoom level</label>
+                <input type="range" step="1" min="1" max="30" class="form-control-range" id="zoom" value="11">
+            </div>
+            <button type="button" class="btn btn-primary" id="mapmove">Move</button>
+        </form>`;
+
+    const mapmoveElement = document.getElementById('mapmove');
+    mapmoveElement.addEventListener('click', (event) => {
+        mapmove();
+    });
 }
 
 function initMap() {
@@ -44,12 +88,7 @@ function initMap() {
         fitBounds: true,
         layerOptions: {
             style: style,
-            pointToLayer: function (data, latlng) {
-                // return L.circleMarker(
-                //     latlng,
-                //     { style: style }
-                // );
-            }
+            pointToLayer: function (data, latlng) { }
         }
     });
     control.addTo(map);
@@ -70,6 +109,20 @@ function initMap() {
     L.easyButton('<img class="icon" src="img/share.svg" title="Share this map (You need to use Chrome for Android.)"/>', function (btn, map) {
         shareImage();
     }).addTo(map);
+
+    map.on('moveend', function (e) {
+        const latitude = document.getElementById('latitude');
+        const longitude = document.getElementById('longitude');
+        const zoom = document.getElementById('zoom');
+        console.log(
+            'moveend',
+            map.getCenter().lat, map.getCenter().lng, map.getZoom(),
+            latitude.value, longitude.value, zoom.value
+        );
+        latitude.value = roundlatlng(map.getCenter().lat);
+        longitude.value = roundlatlng(map.getCenter().lng);
+        zoom.value = map.getZoom();
+    });
 }
 
 function initMiniMap() {
