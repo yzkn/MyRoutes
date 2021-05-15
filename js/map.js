@@ -1,11 +1,41 @@
 'use strict';
 
+
 // Var
 var L;
 var control;
 var map;
 var osm;
 var thisUrl = location.href;
+
+
+// 地図設定
+var baseMaps = {
+    'Esri(航空写真)': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        }),
+    'OSM': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            attribution: '© OpenStreetMap contributors'
+        }),
+    '地理院タイル': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+        {
+            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。'
+        }),
+    '淡色地図': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
+        {
+            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。'
+        }),
+    '色別標高図': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png',
+        {
+            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　海域部は海上保安庁海洋情報部の資料を使用して作成'
+        }),
+    '20万分1土地利用図': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/lum200k/{z}/{x}/{y}.png',
+        {
+            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果です。'
+        })
+};
 
 
 // Util
@@ -31,17 +61,6 @@ function roundlatlng(val) {
 
 // Initialize
 function initMenu() {
-    var menu = document.getElementById('menu');
-    menu.innerHTML = `
-        <ul class="list-group">
-            <li class="list-group-item"><a href="osm.html" target="_blank">OSM</a></li>
-            <li class="list-group-item"><a href="index.html" target="_blank">Esri(航空写真)</a></li>
-            <li class="list-group-item"><a href="gsistd.html" target="_blank">地理院タイル</a></li>
-            <li class="list-group-item"><a href="gsipale.html" target="_blank">淡色地図</a></li>
-            <li class="list-group-item"><a href="gsirelief.html" target="_blank">色別標高図</a></li>
-            <li class="list-group-item"><a href="gsilum200k.html" target="_blank">20万分1土地利用図</a></li>
-        </ul>`;
-
     var latlngzoom = document.getElementById('latlngzoom');
     latlngzoom.innerHTML = `
         <form>
@@ -68,13 +87,12 @@ function initMenu() {
 
 function initMap() {
     L = window.L;
-    osm = L.tileLayer(uri, {
-        attribution: attr
-    });
     map = L.map('map', {
         center: [35.681236, 139.767125],
         zoom: 11
-    }).addLayer(osm);
+    }).addLayer(baseMaps['Esri(航空写真)']);
+    L.control.layers(baseMaps).addTo(map);
+
     var style = {
         color: 'red',
         opacity: 1.0,
@@ -126,8 +144,7 @@ function initMap() {
 }
 
 function initMiniMap() {
-    var osm2 = new L.TileLayer(uriMini, { attribution: attr });
-    var miniMap = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
+    new L.Control.MiniMap(baseMaps['地理院タイル'], { toggleDisplay: true }).addTo(map);
 }
 
 function initGeoman() {
