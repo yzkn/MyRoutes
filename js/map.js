@@ -114,6 +114,9 @@ function initMap() {
         var layer = e.layer;
         console.log(layer);
     });
+    control.loader.on('data:error', function (error) {
+        console.error(error);
+    });
 
     L.control.BigImage({
         downloadTitle: 'Download',
