@@ -27,6 +27,7 @@
   right: 0;
 }
 
+html,
 body,
 .container {
   overscroll-behavior-y: none;
