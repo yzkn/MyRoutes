@@ -34,6 +34,18 @@ var baseMaps = {
     '20万分1土地利用図': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/lum200k/{z}/{x}/{y}.png',
         {
             attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果です。'
+        }),
+    'Google Maps': L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+        {
+            attribution: '&copy; Google'
+        }),
+    'Google Satellite': L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+        {
+            attribution: '&copy; Google'
+        }),
+    'Google Satellite Hybrid': L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+        {
+            attribution: '&copy; Google'
         })
 };
 
