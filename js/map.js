@@ -29,7 +29,7 @@ var baseMaps = {
         {
             attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。'
         }),
-    '航空写真': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.png',
+    '航空写真': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
         {
             attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。'
         }),
@@ -106,6 +106,16 @@ var overlayMaps = {
         {
             attribution: '&copy; Google',
             opacity: 0.4
+        }),
+    'Google Roads 40%': L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}',
+        {
+            attribution: '&copy; Google',
+            opacity: 0.4
+        }),
+    'Google Roads 100%': L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}',
+        {
+            attribution: '&copy; Google',
+            opacity: 1
         })
 };
 
