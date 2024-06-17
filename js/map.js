@@ -50,6 +50,11 @@ var baseMaps = {
             attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。'
         }),
 
+    '地理院地図Vector（道路）': L.maplibreGL({
+        style: `style/road.json`,
+        attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)　この地理院タイルは基本測量成果（名称：電子地形図（タイル））です。'
+    }),
+
     'Google Maps': L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
         {
             attribution: '&copy; Google'
