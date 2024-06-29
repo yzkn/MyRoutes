@@ -4,15 +4,14 @@ const apiBaseUrl = 'https://tjwn.glitch.me';
 const apiLocationUrl = '/location/';
 
 const apiTargetLocations = [
-    '練馬区', '所沢市', '鶴ヶ島市'
-/*
-,
+    '練馬区', '所沢市', '鶴ヶ島市',
     '嵐山町',
-    // '上里町',
+    '上里町',
     '高崎市',
-    // '渋川市', '沼田市', 'みなかみ町', '湯沢町', '南魚沼市', '魚沼市', '小千谷市', '長岡市',
+    '渋川市', '沼田市', 'みなかみ町', '湯沢町', '南魚沼市',
+    // '魚沼市', '小千谷市', '長岡市',
     // '三条市', '新潟市',
-    // '富岡市',
+    '富岡市',
     '軽井沢町', '佐久市',
     // '小海町',
     // '上田市', '千曲市',
@@ -30,15 +29,14 @@ const apiTargetLocations = [
     // '北杜市', '富士見町', '茅野市',
     '岡谷市',
     // '松本市', '麻績村',
-    // '伊那市', '飯田市', '中津川市', '多治見市', '小牧市', '名古屋市',
+    '伊那市', '飯田市', '中津川市', '多治見市', '小牧市', '名古屋市',
     '町田市',
     '海老名市',
     '秦野市',
     //'松田町', '山北町',
     // '小山町',
-    '御殿場市', '裾野市',
-    //'沼津市',
-    // '伊豆市', '下田市',
+    '御殿場市',
+    // '裾野市', '沼津市', '伊豆市', '下田市',
     '富士市',
     // '静岡市清水区',
     '静岡市',
@@ -47,14 +45,12 @@ const apiTargetLocations = [
     // '豊川市', '岡崎市',
     '豊田市',
     // '刈谷市'
-*/
 ];
 
 
-const retrieve = async _ => {
+const retrieve = async city => {
     fetch(
-        apiBaseUrl + apiLocationUrl + apiTargetLocations.join(',')
-        // "http://localhost/GitHub/MyRoutes/%E7%A7%A9%E7%88%B6%E5%B8%82,%E9%A3%AF%E8%83%BD%E5%B8%82,%E6%89%80%E6%B2%A2%E5%B8%82.json"
+        apiBaseUrl + apiLocationUrl + city
         , {
             headers: {
                 Accept: "application/json",
@@ -112,7 +108,9 @@ const checkVersion = _ => {
         }
     }).then(response => {
         if (response.status == 200) {
-            retrieve();
+            apiTargetLocations.forEach(city => {
+                retrieve(city);
+            });
         }
     });
 };
