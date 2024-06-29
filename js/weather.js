@@ -4,7 +4,9 @@ const apiBaseUrl = 'https://tjwn.glitch.me';
 const apiLocationUrl = '/location/';
 
 const apiTargetLocations = [
-    '練馬区', '所沢市', '鶴ヶ島市',
+    '練馬区', '所沢市', '鶴ヶ島市'
+/*
+,
     '嵐山町',
     // '上里町',
     '高崎市',
@@ -45,6 +47,7 @@ const apiTargetLocations = [
     // '豊川市', '岡崎市',
     '豊田市',
     // '刈谷市'
+*/
 ];
 
 
