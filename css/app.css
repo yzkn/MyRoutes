@@ -32,7 +32,3 @@ body,
 .container {
   overscroll-behavior-y: none;
 }
-
-img.weatherIcon {
-  width: 5px;
-}
