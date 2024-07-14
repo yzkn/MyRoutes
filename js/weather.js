@@ -3,6 +3,9 @@ const apiBaseUrl = 'https://tjwn.glitch.me';
 
 const apiLocationUrl = '/location/';
 
+const timeIndex = [0, 24];
+// const timeIndex = [0, 72];
+
 const apiTargetLocations = [
     '練馬区', '所沢市', '鶴ヶ島市',
     '嵐山町',
@@ -63,13 +66,13 @@ const retrieve = async city => {
                 let result = `<div><div title="${jsonData[city].hall.lat},${jsonData[city].hall.long}">${city}</div>`;
 
                 let tjResult = '<div class="tj">';
-                Object.keys(jsonData[city].tj).forEach((tjDate) => {
+                Object.keys(jsonData[city].tj).slice(timeIndex[0], timeIndex[1]).forEach((tjDate) => {
                     tjResult += `<img class="weatherIcon" title="${tjDate} ${jsonData[city].tj[tjDate].temperature}℃" src="${jsonData[city].tj[tjDate].weatherIcon}">`;
                 });
                 tjResult += `</div>`;
 
                 let wnResult = '<div class="wn">';
-                Object.keys(jsonData[city].wn).forEach((wnDate) => {
+                Object.keys(jsonData[city].wn).slice(timeIndex[0], timeIndex[1]).forEach((wnDate) => {
                     wnResult += `<img class="weatherIcon" title="${wnDate} ${jsonData[city].wn[wnDate].temperature}℃" src="${jsonData[city].wn[wnDate].weatherIcon}">`;
                 });
                 wnResult += `</div>`;
@@ -91,7 +94,8 @@ const retrieve = async city => {
                         jsonData[city].hall.long
                     ],
                     { icon: divIcon }).addTo(map);
-                marker.bindPopup(result, { autoClose: false, minWidth: 400 }).openPopup();
+                markerWidth = 5 * (1 + timeIndex[1] - timeIndex[0]);
+                marker.bindPopup(result, { autoClose: false, minWidth: markerWidth }).openPopup();
                 // マーカー
             });
 
