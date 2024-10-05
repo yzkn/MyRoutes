@@ -32,3 +32,9 @@ body,
 .container {
   overscroll-behavior-y: none;
 }
+
+.leaflet-ruler,
+.leaflet-ruler-clicked {
+  height: 30px !important;
+  width: 30px !important;
+}

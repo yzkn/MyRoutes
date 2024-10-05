@@ -556,7 +556,7 @@ function initMap2() {
     map = L.map('map', {
         center: [35.681236, 139.767125],
         zoom: 11
-    }).addLayer(baseMaps['Esri(航空写真)']);
+    }).addLayer(baseMaps['淡色地図']);
     // L.control.layers(baseMaps).addTo(map);
     L.control.layers(baseMaps, overlayMaps).addTo(map);
 
@@ -587,6 +587,30 @@ function initMap2() {
         position: 'topright'
     });
 
+    L.control.ruler({
+        position: 'topleft',         // Leaflet control position option
+        // circleMarker: {               // Leaflet circle marker options for points used in this plugin
+        //     color: 'red',
+        //     radius: 2
+        // },
+        // lineStyle: {                  // Leaflet polyline options for lines used in this plugin
+        //     color: 'red',
+        //     dashArray: '1,6'
+        // },
+        // lengthUnit: {                 // You can use custom length units. Default unit is kilometers.
+        //     display: 'km',              // This is the display value will be shown on the screen. Example: 'meters'
+        //     decimal: 2,                 // Distance result will be fixed to this value.
+        //     factor: null,               // This value will be used to convert from kilometers. Example: 1000 (from kilometers to meters)
+        //     label: 'Distance:'
+        // },
+        // angleUnit: {
+        //     display: '&deg;',           // This is the display value will be shown on the screen. Example: 'Gradian'
+        //     decimal: 2,                 // Bearing result will be fixed to this value.
+        //     factor: null,                // This option is required to customize angle unit. Specify solid angle value for angle unit. Example: 400 (for gradian).
+        //     label: 'Bearing:'
+        // }
+    }).addTo(map);
+
     L.control.BigImage({
         downloadTitle: 'Download',
         inputTitle: ' Download your png file: ',
@@ -599,22 +623,6 @@ function initMap2() {
     L.easyButton('<img class="icon" src="img/share.svg" title="Share this map (You need to use Chrome for Android.)"/>', function (btn, map) {
         shareImage();
     }).addTo(map);
-
-    map.on('moveend', function (e) {
-        const latitude = document.getElementById('latitude');
-        const longitude = document.getElementById('longitude');
-        const zoom = document.getElementById('zoom');
-        if (latitude && longitude && zoom) {
-            console.log(
-                'moveend',
-                map.getCenter().lat, map.getCenter().lng, map.getZoom(),
-                latitude.value, longitude.value, zoom.value
-            );
-            latitude.value = roundlatlng(map.getCenter().lat);
-            longitude.value = roundlatlng(map.getCenter().lng);
-            zoom.value = map.getZoom();
-        }
-    });
 }
 
 function initMiniMap() {
