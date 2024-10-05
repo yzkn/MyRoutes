@@ -1,14 +1,14 @@
 {
   "dir": "ltr",
   "lang": "ja",
-  "name": "MyRoutes",
-  "short_name": "MyRoutes",
-  "scope": "/MyRoutes/",
+  "name": "MyRoute",
+  "short_name": "MyRoute",
+  "scope": "/",
   "display": "standalone",
-  "start_url": "https://ya-androidapp.github.io/MyRoutes/",
+  "start_url": "https://myroute.pages.dev/",
   "background_color": "#ffffff",
   "theme_color": "transparent",
-  "description": "The visualizer of GPS track logs",
+  "description": "GPS track log viewer",
   "orientation": "any",
   "related_applications": [],
   "prefer_related_applications": false,
@@ -29,6 +29,6 @@
       "type": "image/png"
     }
   ],
-  "url": "https://ya-androidapp.github.io/MyRoutes/",
+  "url": "https://myroute.pages.dev/",
   "generated": true
 }
