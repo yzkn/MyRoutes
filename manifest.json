@@ -1,11 +1,11 @@
 {
   "dir": "ltr",
   "lang": "ja",
-  "name": "MyRoute",
-  "short_name": "MyRoute",
+  "name": "mytrack",
+  "short_name": "mytrack",
   "scope": "/",
   "display": "standalone",
-  "start_url": "https://myroute.pages.dev/",
+  "start_url": "https://mytrack.pages.dev/",
   "background_color": "#ffffff",
   "theme_color": "transparent",
   "description": "GPS track log viewer",
@@ -29,6 +29,6 @@
       "type": "image/png"
     }
   ],
-  "url": "https://myroute.pages.dev/",
+  "url": "https://mytrack.pages.dev/",
   "generated": true
 }

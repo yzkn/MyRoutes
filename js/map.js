@@ -534,7 +534,7 @@ function shareImage() {
                     const image = new File([blob], 'map.png', { type: 'image/png' });
                     if (navigator.canShare && navigator.canShare({ files: [image] })) {
                         navigator.share({
-                            text: 'MyRoutesで作成した軌跡画像を共有します。',
+                            text: 'mytrackで作成した軌跡画像を共有します。',
                             url: thisUrl,
                             files: [image]
                         }).then(() => {
