@@ -551,6 +551,72 @@ function initMap() {
     });
 }
 
+function initMap2() {
+    L = window.L;
+    map = L.map('map', {
+        center: [35.681236, 139.767125],
+        zoom: 11
+    }).addLayer(baseMaps['Esri(航空写真)']);
+    // L.control.layers(baseMaps).addTo(map);
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    L.geolet({ position: 'topleft' }).addTo(map);
+
+    L.Control.betterFileLayer({
+        position: 'topleft', // Leaflet control position
+        fileSizeLimit: 1024000, // File size limit in kb (default: 1024 kb)
+        style: {}, // Overwrite the default BFL GeoJSON style function
+        onEachFeature: () => { }, // Overwrite the default BFL GeoJSON onEachFeature function
+        layer: L.customLayer, // If you want a custom layer to be used (must be a GeoJSON class inheritance)
+        // // Restrict accepted file formats (default: .gpx, .kml, .kmz, .geojson, .json, .csv, .topojson, .wkt, .shp, .shx, .prj, .dbf, .zip)
+        // formats: ['.geojson', '.kml', '.gpx'],
+        importOptions: { // Some file types may have import options, for now, just csv is documented
+            csv: {
+                delimiter: ';',
+                latfield: 'LAT',
+                lonfield: 'LONG',
+            },
+        },
+        text: { // If you need translate
+            title: "Import a layer", // Plugin Button Text
+        },
+    })
+        .addTo(map);
+
+    map.pm.addControls({
+        position: 'topright'
+    });
+
+    L.control.BigImage({
+        downloadTitle: 'Download',
+        inputTitle: ' Download your png file: ',
+        maxScale: 3,
+        position: 'topleft',
+        printControlTitle: 'Capture image',
+        title: 'Capture image',
+    }).addTo(map);
+
+    L.easyButton('<img class="icon" src="img/share.svg" title="Share this map (You need to use Chrome for Android.)"/>', function (btn, map) {
+        shareImage();
+    }).addTo(map);
+
+    map.on('moveend', function (e) {
+        const latitude = document.getElementById('latitude');
+        const longitude = document.getElementById('longitude');
+        const zoom = document.getElementById('zoom');
+        if (latitude && longitude && zoom) {
+            console.log(
+                'moveend',
+                map.getCenter().lat, map.getCenter().lng, map.getZoom(),
+                latitude.value, longitude.value, zoom.value
+            );
+            latitude.value = roundlatlng(map.getCenter().lat);
+            longitude.value = roundlatlng(map.getCenter().lng);
+            zoom.value = map.getZoom();
+        }
+    });
+}
+
 function initMiniMap() {
     new L.Control.MiniMap(baseMaps['地理院タイル'], { toggleDisplay: true }).addTo(map);
 }
@@ -559,10 +625,6 @@ function initGeoman() {
     map.pm.addControls({
         position: 'topleft'
     });
-}
-
-function initGeolet() {
-    L.geolet({ position: 'topleft' }).addTo(map);
 }
 
 //
