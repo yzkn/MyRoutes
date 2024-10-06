@@ -17,7 +17,7 @@ var baseMaps = {
         }),
     'OSM': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-            attribution: '© OpenStreetMap contributors'
+            attribution: 'c OpenStreetMap contributors'
         }),
     '地理院タイル': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
         {
@@ -285,11 +285,11 @@ var baseMaps = {
     // みなとオアシス
     '土地被覆（GLCNMO）': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/gmld_glcnmo2/{z}/{x}/{y}.png',
         {
-            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html) © 国土地理院・千葉大学・協働機関'
+            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html) c 国土地理院・千葉大学・協働機関'
         }),
     '植生（樹木被覆率）': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/gmld_ptc2/{z}/{x}/{y}.png',
         {
-            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html) © 国土地理院・千葉大学・協働機関'
+            attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html) c 国土地理院・千葉大学・協働機関'
         }),
     '標高タイル（基盤地図情報数値標高モデル）（DEM10B PNG形式）': L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/dem_png/{z}/{x}/{y}.png',
         {
@@ -334,7 +334,32 @@ var baseMaps = {
 
     '地理院地図Vector（道路）': L.maplibreGL({
         style: `style/road.json`,
-        attribution: '出典：国土地理院ウェブサイト(https://maps.gsi.go.jp/development/ichiran.html)'
+        attribution: '出典：地理院地図Vector(https://maps.gsi.go.jp/vector/)'
+    }),
+    '地理院地図Vector（標準地図）': L.maplibreGL({
+        style: `style/std.json`,
+        attribution: '出典：地理院地図Vector提供実験(https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) https://github.com/gsi-cyberjapan/gsivectortile-mapbox-gl-js'
+    }),
+    '地理院地図Vector（淡色地図）': L.maplibreGL({
+        style: `style/pale.json`,
+        attribution: '出典：地理院地図Vector提供実験(https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) https://github.com/gsi-cyberjapan/gsivectortile-mapbox-gl-js'
+    }),
+    '地理院地図Vector（白地図）': L.maplibreGL({
+        style: `style/blank.json`,
+        attribution: '出典：地理院地図Vector提供実験(https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) https://github.com/gsi-cyberjapan/gsivectortile-mapbox-gl-js'
+    }),
+
+    '地理院地図Vector（ベクトルタイルを用いた3D風地図）': L.maplibreGL({
+        style: `style/3d/building3d.json`,
+        attribution: '出典：地理院地図Vector提供実験(https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) https://github.com/gsi-cyberjapan/gsivectortile-3d-like-building'
+    }),
+    '地理院地図Vector（ベクトルタイルを用いた3D風地図）building3ddark': L.maplibreGL({
+        style: `style/3d/building3ddark.json`,
+        attribution: '出典：地理院地図Vector提供実験(https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) https://github.com/gsi-cyberjapan/gsivectortile-3d-like-building'
+    }),
+    '地理院地図Vector（ベクトルタイルを用いた3D風地図）building3dphoto': L.maplibreGL({
+        style: `style/3d/building3dphoto.json`,
+        attribution: '出典：地理院地図Vector提供実験(https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) https://github.com/gsi-cyberjapan/gsivectortile-3d-like-building'
     }),
 
     '地質図（産総研地質調査総合センター）': L.tileLayer('https://gbank.gsj.jp/seamless/v2/api/1.2/tiles/{z}/{y}/{x}.png',
