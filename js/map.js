@@ -539,6 +539,11 @@ function initMap2() {
     L.easyButton('<img class="icon" src="img/share.svg" title="Share this map (You need to use Chrome for Android.)"/>', function (btn, map) {
         shareImage();
     }).addTo(map);
+
+    map.on('moveend', async function (e) {
+        document.title = 'mytrack (' + map.getCenter().lat + ',' + map.getCenter().lng + '付近)';
+    });
+
 }
 
 function shareImage() {

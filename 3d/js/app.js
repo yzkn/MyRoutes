@@ -109,6 +109,10 @@ const exportControl = new MaplibreExportControl({
 });
 map.addControl(exportControl, 'top-right');
 
+map.on('moveend', async (e) => {
+    document.title = 'mytrack3D (' + map.getCenter().lat + ',' + map.getCenter().lng + '付近)';
+})
+
 
 function handleFilesSelect(evt) {
     const files = Array.from(evt.target.files);
