@@ -541,7 +541,7 @@ function initMap2() {
     }).addTo(map);
 
     map.on('moveend', async function (e) {
-        document.title = 'mytrack (' + map.getCenter().lat + ',' + map.getCenter().lng + '付近)';
+        document.title = 'mytrack (' + await reverseGeocoding(map.getCenter().lat, map.getCenter().lng) + '付近)';
     });
 
 }
