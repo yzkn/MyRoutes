@@ -111,6 +111,17 @@ map.addControl(exportControl, 'top-right');
 
 map.on('moveend', async (e) => {
     document.title = 'mytrack3D (' + await reverseGeocoding(map.getCenter().lat, map.getCenter().lng) + '付近)';
+
+    if ('URLSearchParams' in window) {
+        const url = new URL(window.location);
+        url.searchParams.set("lat", map.getCenter().lat);
+        url.searchParams.set("lon", map.getCenter().lng);
+        history.pushState(null, '', url);
+    }
+
+    // 35123401381234
+    const latlon = Math.floor(map.getCenter().lat * 1000) * 100000000 + Math.floor(map.getCenter().lon * 1000);
+    gtag('event', 'mapmove', { 'event_category': 'mapmove', 'event_label': 'mapmove3d', 'value': latlon });
 })
 
 
