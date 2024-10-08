@@ -27945,7 +27945,7 @@ function(a) {
 */
 function(a) {
   function d() {
-    return (Ai.canvg ? Promise.resolve(Ai.canvg) : import("./index.es-DoMiftKY-DZfCpgX1.js")).catch(function(l) {
+    return (Ai.canvg ? Promise.resolve(Ai.canvg) : import("./index.es-DoMiftKY-BXwldc-X.js")).catch(function(l) {
       return Promise.reject(new Error("Could not load canvg: " + l));
     }).then(function(l) {
       return l.default ? l.default : l;
@@ -33397,7 +33397,7 @@ const ax = new Kb({
 });
 El.addControl(ax, "top-right");
 El.on("moveend", async (a) => {
-  document.title = "mytrack3D (" + El.getCenter().lat + "," + El.getCenter().lng + "付近)";
+  document.title = "mytrack3D (" + await reverseGeocoding(El.getCenter().lat, El.getCenter().lng) + "付近)";
 });
 function sx(a) {
   Array.from(a.target.files).forEach((l) => {

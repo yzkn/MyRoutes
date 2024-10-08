@@ -110,7 +110,7 @@ const exportControl = new MaplibreExportControl({
 map.addControl(exportControl, 'top-right');
 
 map.on('moveend', async (e) => {
-    document.title = 'mytrack3D (' + map.getCenter().lat + ',' + map.getCenter().lng + '付近)';
+    document.title = 'mytrack3D (' + await reverseGeocoding(map.getCenter().lat, map.getCenter().lng) + '付近)';
 })
 
 
