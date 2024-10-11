@@ -32,6 +32,7 @@ const gsiTerrainSource = useGsiTerrainSource(addProtocol, {
 const map = new Map({
     container: 'map',
     center: [139.767125, 35.681236],
+    hash: true,
     zoom: 10,
     pitch: 70,
     maplibreLogo: true,

@@ -474,6 +474,7 @@ function initMap2() {
         zoom: 11
     }).addLayer(baseMaps['淡色地図']);
     // L.control.layers(baseMaps).addTo(map);
+    L.Permalink.setup(map);
     L.control.layers(baseMaps, overlayMaps).addTo(map);
 
     L.geolet({ position: 'topleft' }).addTo(map);

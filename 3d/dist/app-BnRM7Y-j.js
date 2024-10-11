@@ -27945,7 +27945,7 @@ function(a) {
 */
 function(a) {
   function d() {
-    return (Ai.canvg ? Promise.resolve(Ai.canvg) : import("./index.es-DoMiftKY-BXwldc-X.js")).catch(function(l) {
+    return (Ai.canvg ? Promise.resolve(Ai.canvg) : import("./index.es-DoMiftKY-BxgqOelN.js")).catch(function(l) {
       return Promise.reject(new Error("Could not load canvg: " + l));
     }).then(function(l) {
       return l.default ? l.default : l;
@@ -33326,6 +33326,7 @@ const nx = zv(bc.addProtocol, {
 }), El = new bc.Map({
   container: "map",
   center: [139.767125, 35.681236],
+  hash: !0,
   zoom: 10,
   pitch: 70,
   maplibreLogo: !0,
