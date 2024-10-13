@@ -1,7 +1,7 @@
 // Copyright (c) 2024 YA-androidapp(https://github.com/yzkn) All rights reserved.
 
 
-import { addProtocol, Map, NavigationControl, ScaleControl, TerrainControl } from 'maplibre-gl';
+import { addProtocol, Map, maplibregl, NavigationControl, ScaleControl, TerrainControl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 // 標高タイル
@@ -19,6 +19,10 @@ import '@watergis/maplibre-gl-export/dist/maplibre-gl-export.css';
 
 //toGeoJSON
 import * as tj from '@mapbox/togeojson';
+
+// Geocoding
+import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
+import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
 
 
 // const gsiTerrainSource = useGsiTerrainSource(addProtocol); // 地理院標高タイル
@@ -88,6 +92,41 @@ map.addControl(
 
 map.addControl(
     new ScaleControl()
+);
+
+map.addControl(
+    new MaplibreGeocoder({
+        forwardGeocode: async (config) => {
+            const term = config.query;
+            const response = await fetch(
+                `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(term)}`
+            );
+            if (!response.ok) {
+                return {};
+            }
+            const resultJson = await response.json();
+            const features = resultJson.map(({ geometry: { coordinates: center }, properties }) => ({
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: center,
+                },
+                place_name: properties.title,
+                center
+            }));
+
+            return {
+                features,
+            };
+        },
+    }, {
+        maplibregl: maplibregl,
+        marker: false,
+        showResultsWhileTyping: true,
+        placeholder: '地名検索',
+        reverseGeocode: true,
+    }),
+    'top-right',
 );
 
 map.addControl(
