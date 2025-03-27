@@ -483,7 +483,13 @@ function initMap2() {
         position: 'topleft', // Leaflet control position
         fileSizeLimit: 1024000, // File size limit in kb (default: 1024 kb)
         style: {}, // Overwrite the default BFL GeoJSON style function
-        onEachFeature: () => { }, // Overwrite the default BFL GeoJSON onEachFeature function
+        // onEachFeature: () => { }, // Overwrite the default BFL GeoJSON onEachFeature function
+        onEachFeature: (feature, layer) => {
+            const coordinates = feature.geometry.coordinates;
+            const properties = feature.properties;
+
+            layer.bindPopup(properties.name + ' ' + coordinates[1] + ',' + coordinates[0]);
+        },
         layer: L.customLayer, // If you want a custom layer to be used (must be a GeoJSON class inheritance)
         // // Restrict accepted file formats (default: .gpx, .kml, .kmz, .geojson, .json, .csv, .topojson, .wkt, .shp, .shx, .prj, .dbf, .zip)
         // formats: ['.geojson', '.kml', '.gpx'],
